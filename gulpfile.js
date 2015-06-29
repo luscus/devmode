@@ -179,16 +179,12 @@ gulp.task('tagVersion', ['commit'], function gitCommit () {
 
   // build new version string
   PACKAGE_VERSION     = 'v' + packageInfo.version;
-      console.log('### END #############\n', arguments);
-      setTimeout(function () {
-        git.tag(PACKAGE_VERSION, PACKAGE_VERSION, function gitTagHandler(err) {
-          //if (err) throw err;
 
-          setTimeout(function () {
-            git.push('origin', 'master', {args: '--tags'}, function gitPushHandler(err) {
-              //if (err) throw err;
-            });
-          }, 1000);
+    git.tag(PACKAGE_VERSION, PACKAGE_VERSION, function gitTagHandler(err) {
+      //if (err) throw err;
+
+        git.push('origin', 'master', {args: '--tags'}, function gitPushHandler(err) {
+          //if (err) throw err;
         });
-      }, 1000);
+    });
 });
