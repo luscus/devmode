@@ -168,21 +168,7 @@ gulp.task('commit', ['bumpVersion'], function gitCommit () {
   return gulp.src(commitFiles)
     .pipe(git.commit(PACKAGE_VERSION, function gitCommitHandler () {
       if (err) throw err;
-    }))
-    .on('end', function () {
-      console.log('### END #############\n', arguments);
-      setTimeout(function () {
-        git.tag(PACKAGE_VERSION, PACKAGE_VERSION, function gitTagHandler(err) {
-          //if (err) throw err;
-
-          setTimeout(function () {
-          git.push('origin', 'master', {args: '--tags'}, function gitPushHandler(err) {
-            //if (err) throw err;
-          });
-          }, 1000);
-        });
-      }, 1000);
-    });
+    }));
 });
 
 gulp.task('tagVersion', ['commit'], function gitCommit () {
