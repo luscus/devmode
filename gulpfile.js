@@ -25,34 +25,6 @@ gulp.task('watch', function() {
 });
 
 
-var bumpDeferred;
-
-// Execute a version bump
-gulp.task('bump', function (callback) {
-  bumpDeferred = Q.defer();
-
-  runSequence(
-    //'coverage',
-    //'shrinkwrap',
-    //'bumpVersion',
-    //'gitCommit',
-    //'gitTag',
-    'gitPush',
-    //'gitPushTags',
-    //'publish',
-    function runSequenceEnd (error) {
-      if (error) {
-        console.log(error.message);
-      } else {
-        console.log('RELEASE FINISHED SUCCESSFULLY');
-      }
-      callback(error);
-    }
-  );
-
-  return bumpDeferred.promise;
-});
-
 
 gulp.task('lint', function() {
 
