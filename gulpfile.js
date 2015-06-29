@@ -171,7 +171,8 @@ gulp.task('commit', ['bumpVersion'], function gitCommit () {
     }));
 });
 
-gulp.task('tagVersion', ['commit'], function gitCommit () {
+gulp.task('release', ['commit'], function gitCommit () {
+  var deferred = Q.defer();
 
   // reload package.json file
   delete require.cache[require.resolve('./package.json')];
@@ -180,11 +181,38 @@ gulp.task('tagVersion', ['commit'], function gitCommit () {
   // build new version string
   PACKAGE_VERSION     = 'v' + packageInfo.version;
 
-    git.tag(PACKAGE_VERSION, PACKAGE_VERSION, function gitTagHandler(err) {
-      //if (err) throw err;
+  git.tag(PACKAGE_VERSION, PACKAGE_VERSION, function gitTagHandler(err) {
+    if (err) {
+      deferred.reject(err);
+      return;
+    }
 
-        git.push('origin', 'master', {args: '--tags'}, function gitPushHandler(err) {
-          //if (err) throw err;
-        });
+    git.push('origin', 'master', {args: '--tags'}, function gitPushHandler(err) {
+      if (err) {
+        deferred.reject(err);
+        return;
+      }
+
+      deferred.resolve();
     });
+  });
+
+  return deferred.promise;
+});
+
+gulp.task('publish', ['release'], function gitCommit () {
+  var deferred = Q.defer();
+
+  npm.load({}, function () {
+    npm.commands.publish(function publishHandler (err) {
+      if (err) {
+        deferred.reject(err);
+        return;
+      }
+
+      deferred.resolve();
+    });
+  });
+
+  return deferred.promise;
 });
