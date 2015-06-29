@@ -156,7 +156,7 @@ gulp.task('bumpVersion', ['shrinkwrap'], function (patch, minor, major) {
 var PACKAGE_VERSION;
 
 
-gulp.task('tagVersion', ['bumpVersion'], function gitCommit () {
+gulp.task('commit', ['bumpVersion'], function gitCommit () {
 
   // reload package.json file
   delete require.cache[require.resolve('./package.json')];
@@ -183,4 +183,26 @@ gulp.task('tagVersion', ['bumpVersion'], function gitCommit () {
         });
       }, 1000);
     });
+});
+
+gulp.task('tagVersion', ['commit'], function gitCommit () {
+
+  // reload package.json file
+  delete require.cache[require.resolve('./package.json')];
+  var packageInfo = require('./package.json');
+
+  // build new version string
+  PACKAGE_VERSION     = 'v' + packageInfo.version;
+      console.log('### END #############\n', arguments);
+      setTimeout(function () {
+        git.tag(PACKAGE_VERSION, PACKAGE_VERSION, function gitTagHandler(err) {
+          //if (err) throw err;
+
+          setTimeout(function () {
+            git.push('origin', 'master', {args: '--tags'}, function gitPushHandler(err) {
+              //if (err) throw err;
+            });
+          }, 1000);
+        });
+      }, 1000);
 });
