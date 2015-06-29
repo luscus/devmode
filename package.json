@@ -1,0 +1,42 @@
+{
+  "name": "devmode",
+  "version": "0.0.56",
+  "license": "MIT",
+  "main": "./lib/devmode",
+  "homepage": "https://github.com/luscus/devmode",
+  "author": "https://github.com/luscus/devmode/graphs/contributors",
+  "bugs": "https://github.com/luscus/devmode/issues",
+  "description": "A tool collection used in the development process",
+  "keywords": [
+    "dev",
+    "development",
+    "tools"
+  ],
+  "dependencies": {
+    "package.root": "0.2.0"
+  },
+  "devDependencies": {
+    "chai": "2.0.0",
+    "gulp": "3.9.0",
+    "gulp-bump": "0.3.1",
+    "gulp-git": "1.2.4",
+    "gulp-istanbul": "0.10.0",
+    "gulp-jshint": "1.11.0",
+    "gulp-mocha": "2.1.1",
+    "gulp-param": "0.6.3",
+    "gulp-shrinkwrap": "2.0.1",
+    "istanbul-cobertura-badger": "0.0.4",
+    "jshint-stylish": "2.0.0",
+    "mocha": "2.1.0",
+    "npm": "2.12.0",
+    "q": "1.4.1",
+    "run-sequence": "1.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:luscus/devmode.git"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
+}
