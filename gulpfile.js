@@ -171,12 +171,14 @@ gulp.task('tagVersion', ['bumpVersion'], function gitCommit () {
     }))
     .on('end', function () {
       console.log('### END #############\n', arguments);
-      git.tag(PACKAGE_VERSION, PACKAGE_VERSION, function gitTagHandler (err) {
-        //if (err) throw err;
-
-        git.push('origin', 'master', {args: '--tags'}, function gitPushHandler (err) {
+      setTimeout(function () {
+        git.tag(PACKAGE_VERSION, PACKAGE_VERSION, function gitTagHandler(err) {
           //if (err) throw err;
+
+          git.push('origin', 'master', {args: '--tags'}, function gitPushHandler(err) {
+            //if (err) throw err;
+          });
         });
-      });
+      }, 1000);
     });
 });

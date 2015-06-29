@@ -1,6 +1,6 @@
 {
   "name": "devmode",
-  "version": "0.0.57",
+  "version": "0.0.58",
   "dependencies": {
     "package.root": {
       "version": "0.2.0",
