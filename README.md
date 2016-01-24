@@ -27,23 +27,17 @@ Uses environment variables to enable or disable development mode functionality i
     // set a custom variable name. default is 'STAGE'
     devmode.STAGE_ENV_VARIABLE_NAME = <YOUR_STAGE_ENV_VARIABLE_NAME>;
 
-### Method "isActive"
-
-    if (devmode.isActive()) {
-      // code will run only in dev mode, which means
-      // process.env.<YOUR_STAGE_ENV_VARIABLE_NAME> equals 'LAB' or 'LOCAL'
-    }
-
-### Method "require"
-
-    var dependency = devmode.require('dependency');
+### Node "require" Wrapper
+A wrapper for the native Node.js [Module.prototype.require](https://nodejs.org/dist/latest-v4.x/docs/api/modules.html#modules_module_require_id) method.
+This wrapper has been inspired by Gleb Bahmutov excellent article
+[Hacking Node require](http://bahmutov.calepin.co/hacking-node-require.html) and the resulting package [really-need](https://github.com/bahmutov/really-need)
 
 Depending on the dev mode status, the dependency package will be loaded
 from the `node_modules` (disabled) or from the `workplace directory` (enabled)
 where your packages are maintained.
 
 It is very useful if your package relays on modules that you also
-have maintain or to extend. In devmode the modules are loaded from
+have to maintain, patch or extend. In devmode the modules are loaded from
 the `workplace directory` and you can edit, test and commit them directly.
 
 <pre>
@@ -59,6 +53,13 @@ the `workplace directory` and you can edit, test and commit them directly.
       |_ package.module.1 (loaded on devmode enabled)
       |_ package.module.2 (loaded on devmode enabled)
 </pre>
+
+### Method "isActive"
+
+    if (devmode.isActive()) {
+      // code will run only in dev mode, which means
+      // process.env.<YOUR_STAGE_ENV_VARIABLE_NAME> equals 'LAB' or 'LOCAL'
+    }
 
     
 --------------
