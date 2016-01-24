@@ -3,7 +3,7 @@
 require('chai').should();
 var expect = require('chai').expect;
 
-var assert  = require("assert");
+var assert  = require('assert');
 var devmode = require('../lib/devmode');
 var pathLib = require('path');
 var root    = require('package.root');
