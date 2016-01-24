@@ -30,7 +30,7 @@ describe('devmode', function () {
   it('should have a property "STAGE_ENV_VARIABLE_NAME"', function () {
     devmode.should.have.property('STAGE_ENV_VARIABLE_NAME');
     devmode.STAGE_ENV_VARIABLE_NAME.should.be.an('string');
-    devmode.STAGE_ENV_VARIABLE_NAME.should.equal('STAGE');
+    devmode.STAGE_ENV_VARIABLE_NAME.should.equal('NODE_ENV');
   });
 
   it('should have a property "DEPENDENCY_PATH_PREFIX"', function () {
@@ -49,11 +49,6 @@ describe('devmode', function () {
     devmode.getRequirePath.should.be.an('function');
   });
 
-  it('should have a method "require"', function () {
-    devmode.should.have.property('require');
-    devmode.require.should.be.an('function');
-  });
-
   describe('isActive method', function () {
     after(function(){
       // runs after all tests in this block
@@ -63,7 +58,8 @@ describe('devmode', function () {
     var values = [
       {value: 'LAB', status:true},
       {value: 'LOCAL', status:true},
-      {value: 'TEST', status:false},
+      {value: 'TEST', status:true},
+      {value: 'PROD', status:false},
       {value: '', status:false},
       {value: null, status:false},
       {value: undefined, status:false},
@@ -119,7 +115,7 @@ describe('devmode', function () {
 
     requirePaths.forEach(function pathIterator (test) {
       it('should return "' + test.path + '" as ' + (test.changed ? 'absolute' : 'relative') + ' path', function () {
-        process.env[devmode.STAGE_ENV_VARIABLE_NAME] = 'TEST';
+        process.env[devmode.STAGE_ENV_VARIABLE_NAME] = 'PROD';
         var path = devmode.getRequirePath(test.path);
 
         assert.equal((path !== test.path), test.changed);
@@ -140,21 +136,22 @@ describe('devmode', function () {
     var values = [
       {value: 'LOCAL', dependency: 'mocha', status:true},
       {value: 'LOCAL', dependency: 'unknown', error: 'Cannot find module \'unknown\'', status:false},
-      {value: 'LOCAL', dependency: '../test/throwErrorModule', error: 'I am brocken', status:false}
+      {value: 'LOCAL', dependency: '../test/throwErrorModule', error: 'Maximum call stack size exceeded', status:false}
     ];
 
     values.forEach(function pathIterator (test) {
       it('should ' + (test.status ? 'return Object' : 'throw Error') + ' for dependency "' + test.dependency + '"', function () {
+
         process.env[devmode.STAGE_ENV_VARIABLE_NAME] = test.value;
 
         if (test.status) {
-          var result      = devmode.require(test.dependency);
+          var result      = require(test.dependency);
           var dependency  = require(test.dependency);
 
           result.should.deep.equal(dependency);
         }
         else {
-          expect(devmode.require.bind(devmode.require,test.dependency)).to.throw(test.error);
+          expect(require.bind(require,test.dependency)).to.throw(test.error);
         }
       });
     });
