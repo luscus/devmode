@@ -1,10 +1,3 @@
-/* jshint node:true */
-/* jshint expr:true*/
-/* global require */
-/* global process */
-/* global describe */
-/* global after */
-/* global it */
 'use strict';
 
 require('chai').should();
