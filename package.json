@@ -1,6 +1,6 @@
 {
   "name": "devmode",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "main": "./lib/devmode",
   "homepage": "https://github.com/luscus/devmode",
@@ -14,7 +14,7 @@
     "tools"
   ],
   "dependencies": {
-    "package.root": "0.2.0"
+    "package.root": "^1.0.1"
   },
   "devDependencies": {
     "chai": "*",

@@ -1,10 +1,10 @@
 {
   "name": "devmode",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "dependencies": {
     "package.root": {
-      "version": "0.2.0",
-      "from": "package.root@0.2.0"
+      "version": "1.0.1",
+      "from": "package.root@1.0.1"
     }
   }
 }
