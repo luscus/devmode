@@ -1,10 +1,16 @@
 {
   "name": "devmode",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "dependencies": {
     "package.root": {
       "version": "1.0.1",
-      "from": "package.root@1.0.1"
+      "from": "package.root@1.0.1",
+      "dependencies": {
+        "package.loader": {
+          "version": "0.3.2",
+          "from": "package.loader@0.3.2"
+        }
+      }
     }
   }
 }
