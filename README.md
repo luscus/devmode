@@ -24,7 +24,7 @@ Uses environment variables to enable or disable development mode functionality i
 
 ### Stage Environment Variable Name
 
-    // set a custom variable name. default is 'STAGE'
+    // set a custom variable name. default is 'NODE_ENV'
     devmode.STAGE_ENV_VARIABLE_NAME = <YOUR_STAGE_ENV_VARIABLE_NAME>;
 
 ### Node "require" Wrapper
@@ -58,7 +58,7 @@ the `workplace directory` and you can edit, test and commit them directly.
 
     if (devmode.isActive()) {
       // code will run only in dev mode, which means
-      // process.env.<YOUR_STAGE_ENV_VARIABLE_NAME> equals 'LAB' or 'LOCAL'
+      // process.env.<YOUR_STAGE_ENV_VARIABLE_NAME> equals or 'LOCAL', 'TEST' or 'LAB'
     }
 
     
