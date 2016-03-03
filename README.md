@@ -14,18 +14,11 @@ Uses environment variables to enable or disable development mode functionality i
 
 ## Installation
 
-    npm install devmode --save
+    npm install -g devmode
     
 ## Usage
 
-### Load Package
-
-    var devmode = require('devmode');
-
-### Stage Environment Variable Name
-
-    // set a custom variable name. default is 'NODE_ENV'
-    devmode.STAGE_ENV_VARIABLE_NAME = <YOUR_STAGE_ENV_VARIABLE_NAME>;
+    devmode path/to/script
 
 ### Node "require" Wrapper
 A wrapper for the native Node.js [Module.prototype.require](https://nodejs.org/dist/latest-v4.x/docs/api/modules.html#modules_module_require_id) method.
@@ -54,16 +47,9 @@ the `workplace directory` and you can edit, test and commit them directly.
       |_ package.module.2 (loaded on devmode enabled)
 </pre>
 
-### Method "isActive"
-
-    if (devmode.isActive()) {
-      // code will run only in dev mode, which means
-      // process.env.<YOUR_STAGE_ENV_VARIABLE_NAME> equals or 'LOCAL', 'TEST' or 'LAB'
-    }
-
     
 --------------
-Copyright (c) 2015 Luscus (luscus.redbeard@gmail.com)
+Copyright (c) 2015-2016 Luscus (luscus.redbeard@gmail.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
