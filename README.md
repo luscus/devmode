@@ -8,9 +8,11 @@
 [![David](https://img.shields.io/david/luscus/devmode.svg?style=flat)](https://david-dm.org/luscus/devmode)
 [![David](https://img.shields.io/david/dev/luscus/devmode.svg?style=flat)](https://david-dm.org/luscus/devmode#info=devDependencies)
 
-A tool collection used in the development process.
+Wrapper for the node binary. As known from similar wrapper like [nodemon](https://www.npmjs.com/package/nodemon) it will
+start a script and restart it on code changes in order to facilitate development.
 
-Uses environment variables to enable or disable development mode functionality in your package.
+The unique feature of this wrapper is that it will also watch any script dependency found in the same working directory,
+allowing the same benefit as with `npm link` for parallele package development.
 
 ## Installation
 
@@ -25,28 +27,46 @@ A wrapper for the native Node.js [Module.prototype.require](https://nodejs.org/d
 This wrapper has been inspired by Gleb Bahmutov excellent article
 [Hacking Node require](http://bahmutov.calepin.co/hacking-node-require.html) and the resulting package [really-need](https://github.com/bahmutov/really-need)
 
-Depending on the dev mode status, the dependency package will be loaded
-from the `node_modules` (disabled) or from the `workplace directory` (enabled)
-where your packages are maintained.
-
-It is very useful if your package relays on modules that you also
-have to maintain, patch or extend. In devmode the modules are loaded from
-the `workplace directory` and you can edit, test and commit them directly.
+When started with `devmode` each dependency packages will be loaded
+from the `workplace directory` (if found) or as usual from the `node_modules`.
+This is true for every package found in the process: dependencies from dependencies from your script
 
 <pre>
-    <WORKPLACE>
-      |_ package
-      |    |
+   WORKPLACE
+      |_ YourProject
+      |    |_ someLib.js          (watched)
+      |    |_ otherLib.js         (watched)
+      |    |_ index.js            (started and watched)
       |    |_ node_modules
-      |         |
-      |         |_ devmode
-      |         |_ package.module.1 (loaded on devmode disabled)
-      |         |_ package.module.2 (loaded on devmode disabled)
+      |         |_ dependency.1   (loaded from workplace)
+      |         |_ dependency.2
+      |         |_ dependency.3   (loaded from workplace)
       |    
-      |_ package.module.1 (loaded on devmode enabled)
-      |_ package.module.2 (loaded on devmode enabled)
+      |_ dependency.1             (loaded)
+      |    |_ data.json           (watched)
+      |    |_ index.js            (watched)
+      |    |_ node_modules
+      |         |_ dependency.n   (loaded from workplace)
+      |         |_ dependency.3   (loaded from workplace)
+      |
+      |_ dependency.3             (loaded)
+      |    |_ data.json           (watched)
+      |    |_ index.js            (watched)
+      |
+      |_ dependency.n             (loaded)
+           |_ index.js            (watched)
 </pre>
 
+## Troubleshooting
+
+### Error: watch ... ENOSPC
+
+This might be because of your system reach out of user can watch files.
+you can use the following command line in Debian, Debian based (Ubuntu, Mint) and CentOS
+
+```bash
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
     
 --------------
 Copyright (c) 2015-2016 Luscus (luscus.redbeard@gmail.com)
