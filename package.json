@@ -15,11 +15,11 @@
     "tools"
   ],
   "dependencies": {
-    "clone": "^1.0.2",
-    "commander": "^2.9.0",
+    "clone": "^1.0",
+    "commander": "^2.9",
     "fs-crawler": "^0",
     "package.root": "^1",
-    "termcolor": "^0.2.0"
+    "termcolor": "^0.2"
   },
   "devDependencies": {
     "chai": "*",
