@@ -6,6 +6,7 @@
 
 
     // Predefined globals
+    "predef": ["-context"],
 
     // Whether the standard browser globals should be predefined.
     "browser": false,
