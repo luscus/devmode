@@ -8,7 +8,9 @@
 [![David](https://img.shields.io/david/luscus/devmode.svg?style=flat)](https://david-dm.org/luscus/devmode)
 [![David](https://img.shields.io/david/dev/luscus/devmode.svg?style=flat)](https://david-dm.org/luscus/devmode#info=devDependencies)
 
-Wrapper for the node binary. As known from similar wrapper like [nodemon](https://www.npmjs.com/package/nodemon) it will
+Node binary wrapper providing the combined features of `modemon` and `npm link`.
+
+As known from similar wrapper like [nodemon](https://www.npmjs.com/package/nodemon) it will
 start a script and restart it on code changes in order to facilitate development.
 
 The unique feature of this wrapper is that it will also watch any script dependency found in the same working directory,

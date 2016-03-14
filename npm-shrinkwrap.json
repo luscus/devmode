@@ -1,7 +1,25 @@
 {
   "name": "devmode",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "dependencies": {
+    "clone": {
+      "version": "1.0.2",
+      "from": "clone@1.0.2"
+    },
+    "commander": {
+      "version": "2.9.0",
+      "from": "commander@2.9.0",
+      "dependencies": {
+        "graceful-readlink": {
+          "version": "1.0.1",
+          "from": "graceful-readlink@>=1.0.0"
+        }
+      }
+    },
+    "fs-crawler": {
+      "version": "0.0.2",
+      "from": "fs-crawler@0.0.2"
+    },
     "package.root": {
       "version": "1.0.1",
       "from": "package.root@1.0.1",
@@ -11,6 +29,10 @@
           "from": "package.loader@0.3.2"
         }
       }
+    },
+    "termcolor": {
+      "version": "0.2.0",
+      "from": "termcolor@0.2.0"
     }
   }
 }
