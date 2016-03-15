@@ -1,9 +1,5 @@
 #!/usr/bin/env node
 'use strict';
-console.log('process.env.PWD:', process.env.PWD);
-console.log('process.argv:', process.argv);
-console.log('process.cwd:', process.cwd());
-console.log('__dirname:', __dirname);
 
 var program = require('commander');
 var cli     = require('../lib/cli');
