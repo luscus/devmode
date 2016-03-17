@@ -18,13 +18,13 @@
     "clone": "^1.0",
     "commander": "^2.9",
     "fs-crawler": "^0",
-    "package.root": "^1",
     "termcolor": "^0.2"
   },
   "devDependencies": {
     "chai": "*",
     "gulp": "^3.9.0",
     "gulpfile.basics": "^0",
+    "package.root": "^1",
     "mocha": "*"
   },
   "repository": {
